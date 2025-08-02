@@ -6,6 +6,7 @@ Zsky *Check License
 Danni Bittman *CL
 Alex Safayan *CL
 MilkAndBanana
+Cookie Assets *CL
 ----
 
 --polyhaven.com--

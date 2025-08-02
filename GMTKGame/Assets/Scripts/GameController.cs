@@ -5,11 +5,15 @@ public class GameController : MonoBehaviour
 {
 
     [SerializeField] GameObject[] Cameras = new GameObject[2];
+    float[] Angles = {37.4f, 37.4f };
     [SerializeField] int DelayTimeMS = 10000;
     static GameController instance;
     int Camera_Index = 0;
     bool GameHasntEnded = true;
     [SerializeField] bool EnableCameraSwitch = false;
+    GameObject playerOBJ;
+
+    public static Animator MainAnimator;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -25,38 +29,43 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         GameHasntEnded = true;
+        playerOBJ = GameObject.FindGameObjectWithTag("Player");
+        MainAnimator = GameObject.FindGameObjectWithTag("MainAnimatorHolder").GetComponent<Animator>();
+
         MainFunc();
+        
     }
 
     async void MainFunc()
     {
         Cameras[0].SetActive(true);
         Cameras[1].SetActive(false);
-        while (GameHasntEnded)
+        do
         {
-            if (EnableCameraSwitch)
+
+            PlayerMovement.ActiveCamera = Cameras[Camera_Index];
+            playerOBJ.transform.localEulerAngles = new Vector3(0, Angles[Camera_Index],0);
+            foreach (GameObject ACam in Cameras)
             {
-                PlayerMovement.ActiveCamera = Cameras[Camera_Index];
-                foreach (GameObject ACam in Cameras)
+                if (ACam == PlayerMovement.ActiveCamera)
                 {
-                    if (ACam == PlayerMovement.ActiveCamera)
-                    {
-                        ACam.SetActive(true);
-                    }
-                    else
-                    {
-                        ACam.SetActive(false);
-                    }
+                    ACam.SetActive(true);
                 }
-                Camera_Index += 1;
-                if (Camera_Index > Cameras.Length - 1)
+                else
                 {
-                    Camera_Index = 0;
+                    ACam.SetActive(false);
                 }
-                await Task.Delay(DelayTimeMS);
             }
-            
-        }
+            Camera_Index += 1;
+            if (Camera_Index > Cameras.Length - 1)
+            {
+                Camera_Index = 0;
+            }
+            await Task.Delay(DelayTimeMS);
+
+
+        } while (GameHasntEnded && EnableCameraSwitch);
+        await Task.Yield();
     }
 
     void OnDestroy()

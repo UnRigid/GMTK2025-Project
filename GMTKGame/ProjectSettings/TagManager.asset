@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - BedroomCam
   - LivingroomCam
+  - MainAnimatorHolder
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
