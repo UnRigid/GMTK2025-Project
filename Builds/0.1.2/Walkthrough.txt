@@ -1,0 +1,4 @@
+Obtain scissors,
+use scissors on pan and can,
+use obtained rust and aluminium with pot(change the angle of camera) to craft thermite,
+attach thermite to electrical box and ignite
