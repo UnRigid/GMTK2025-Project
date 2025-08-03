@@ -22,6 +22,7 @@ public class Bed : MonoBehaviour, IInteractable
     void CutBedding()
     {
         InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        
     }
 
     public void Interact(Vector3 mousePos)
