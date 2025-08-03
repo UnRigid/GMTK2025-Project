@@ -4,9 +4,11 @@ public class Lighter : MonoBehaviour, IInteractable, IInventoriable
 {
 
     [SerializeField]Sprite LighterImage;
+
+    public int LighterIndex;
     public void Interact(Vector3 m)
     {
-        InventoryManager.PickUpItem(gameObject, LighterImage);
+        LighterIndex = InventoryManager.PickUpItem(gameObject, LighterImage);
         transform.parent.gameObject.SetActive(false);
     }
 

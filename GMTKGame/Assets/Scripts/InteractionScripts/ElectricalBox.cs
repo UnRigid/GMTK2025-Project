@@ -19,24 +19,22 @@ public class ElectricalBox : MonoBehaviour, IInteractable
 
     void PlaceThermite()
     {
-        InventoryManager.RemoveItem(UsableItems[0]);
-        InventoryManager.RemoveItem(UsableItems[1]);
+        if (InventoryManager.CheckForItem(UsableItems[0]) && InventoryManager.CheckForItem(UsableItems[1]))
+        {
+            InventoryManager.RemoveItems(UsableItems);
+        
         ThermiteObj.SetActive(true);
         gameObject.SetActive(false);
-                Destroy(DynamicInteractParent.GetChild(0).gameObject);
-
+                
+        }
+        
+Destroy(DynamicInteractParent.GetChild(0).gameObject);
     }
 
     public void Interact(Vector3 mousePos)
     {
 
-
-
-
-
-        if (InventoryManager.CheckForItem(UsableItems[0]) && InventoryManager.CheckForItem(UsableItems[1]))
-        {
-            GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
+GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
             if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
             {
                 Destroy(DynamicInteractParent.GetChild(0).gameObject);
@@ -49,7 +47,10 @@ public class ElectricalBox : MonoBehaviour, IInteractable
 
             Button button = UseScissorsButton.GetComponent<Button>();
             button.onClick.AddListener(PlaceThermite);
-        }
+
+
+
+        
     }
 
 }

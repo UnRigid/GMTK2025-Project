@@ -288,6 +288,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ReturnToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4f91f3f-0813-4a35-8d6d-1fbdb6b0baa1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

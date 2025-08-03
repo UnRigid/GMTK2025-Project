@@ -11,6 +11,8 @@ public class Pan : MonoBehaviour, IInteractable, IInventoriable
     [SerializeField] GameObject[] ObtainableItems;// 0-rust
     [SerializeField] Sprite[] Icons;// 0-Rust
 
+    public int RustIndex;
+
     public bool InRange()
     {
         Transform Overlay = transform.GetChild(0);
@@ -21,16 +23,18 @@ public class Pan : MonoBehaviour, IInteractable, IInventoriable
 
     void GetRust()
     {
-        InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        if (InventoryManager.CheckForItem(UsableItems[0]))
+        {
+RustIndex = InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        }
+        
                 Destroy(DynamicInteractParent.GetChild(0).gameObject);
 
     }
 
     public void Interact(Vector3 mousePos)
     {
-        if (InventoryManager.CheckForItem(UsableItems[0]))
-        {
-            GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
+        GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
             if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
             {
                 Destroy(DynamicInteractParent.GetChild(0).gameObject);
@@ -43,7 +47,7 @@ public class Pan : MonoBehaviour, IInteractable, IInventoriable
 
             Button button = UseScissorsButton.GetComponent<Button>();
             button.onClick.AddListener(GetRust);
-        }
+        
     }
 
     public Vector3 Scale()

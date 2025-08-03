@@ -10,6 +10,8 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] GameObject[] UsableItems;// 0-Scissors
     [SerializeField] GameObject[] ObtainableItems;// 0-Rope
     [SerializeField] Sprite[] Icons;// 0-Rope
+
+    public int RopeIndex;
     
     public bool InRange()
     {
@@ -21,21 +23,27 @@ public class Bed : MonoBehaviour, IInteractable
 
     void CutBedding()
     {
-        InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
-                Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        if (InventoryManager.CheckForItem(UsableItems[0]))
+        {
+            RopeIndex = InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+
+        }
+        
+            Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        
 
     }
 
     public void Interact(Vector3 mousePos)
     {
-        if (InventoryManager.CheckForItem(UsableItems[0]))
+        GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
+
+        if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
         {
-            GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
-            if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
-            {
-                Destroy(DynamicInteractParent.GetChild(0).gameObject);
-            }
-            Transform UseScissorsChild = UseScissorsButton.transform.GetChild(0);
+            Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        }
+
+        Transform UseScissorsChild = UseScissorsButton.transform.GetChild(0);
             TMP_Text UseScissorsText = UseScissorsChild.GetComponent<TMP_Text>();
             UseScissorsText.text = "Use Scissors";
             RectTransform rectTransform = UseScissorsButton.GetComponent<RectTransform>();
@@ -43,6 +51,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             Button button = UseScissorsButton.GetComponent<Button>();
             button.onClick.AddListener(CutBedding);
-        }
+
+        
     }
 }

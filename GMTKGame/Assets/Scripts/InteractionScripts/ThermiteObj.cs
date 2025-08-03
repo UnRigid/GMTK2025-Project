@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class ThermiteObj : MonoBehaviour, IInteractable
 {
@@ -20,19 +21,25 @@ public class ThermiteObj : MonoBehaviour, IInteractable
         return IsInRange;
     }
 
-    void IgniteThermite()
+    async void IgniteThermite()
     {
-        Particles.SetActive(true);
-                Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        if (InventoryManager.CheckForItem(UsableItems[0]))
+        {
+            Particles.SetActive(true);
+        InventoryManager.RemoveItems(UsableItems);
+        
+        await Task.Delay(2000);
         EndGameUI.SetActive(true);
+
         GameController.MainAnimator.SetTrigger("EndGame");
+        await Task.Yield();
+
+        }Destroy(DynamicInteractParent.GetChild(0).gameObject);
     }
 
     public void Interact(Vector3 mousePos)
     {
-        if (InventoryManager.CheckForItem(UsableItems[0]))
-        {
-            GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
+        GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
             if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
             {
                 Destroy(DynamicInteractParent.GetChild(0).gameObject);
@@ -45,6 +52,6 @@ public class ThermiteObj : MonoBehaviour, IInteractable
 
             Button button = UseScissorsButton.GetComponent<Button>();
             button.onClick.AddListener(IgniteThermite);
-        }
+        
     }
 }

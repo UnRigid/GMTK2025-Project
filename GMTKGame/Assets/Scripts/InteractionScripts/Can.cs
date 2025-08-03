@@ -11,18 +11,23 @@ public class Can : MonoBehaviour, IInteractable, IInventoriable
     [SerializeField] GameObject[] ObtainableItems;// 0-Chopped Can
     [SerializeField] Sprite[] Icons;// 0-Chopped Can
 
+    public int ChoppedCanIndex;
+
     void CutCan()
     {
-        InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
-                    Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        if (InventoryManager.CheckForItem(UsableItems[0]))
+        {
+ChoppedCanIndex = InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        
+        Destroy(gameObject.transform.parent.gameObject);
+        }
+        Destroy(DynamicInteractParent.GetChild(0).gameObject);
 
     }
 
     public void Interact(Vector3 mousePos)
     {
-        if (InventoryManager.CheckForItem(UsableItems[0]))
-        {
-            GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
+        GameObject UseScissorsButton = Instantiate(ButtonPrefab, mousePos, Quaternion.identity, DynamicInteractParent);
             if (DynamicInteractParent.GetChild(0).gameObject != UseScissorsButton)
             {
                 Destroy(DynamicInteractParent.GetChild(0).gameObject);
@@ -35,7 +40,7 @@ public class Can : MonoBehaviour, IInteractable, IInventoriable
 
             Button button = UseScissorsButton.GetComponent<Button>();
             button.onClick.AddListener(CutCan);
-        }
+        
     }
 
     public bool InRange()
