@@ -1,13 +1,20 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
+using TMPro;
+using Unity.UI;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class InventoryManager : MonoBehaviour
 {
 
-    public static GameObject[] HeldItems = new GameObject[4];
+    public static List<GameObject> HeldItems = new List<GameObject>();
     static InventoryManager instance;
 
-    private void Awake() {
+    static GameObject[] ItemHolders = new GameObject[4];
+
+    private void Awake()
+    {
         if (instance != null && instance != this)
         {
             Destroy(instance);
@@ -18,36 +25,37 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    private void Start() {
+        ItemHolders = GameObject.FindGameObjectsWithTag("ItemHolders");
+    }
 
     public void Craft()
     {
-        
+
     }
 
 
 
 
 
-    public static void AddItem(GameObject Item)
+    public static void PickUpItem(GameObject Item)
     {
-        HeldItems[HeldItems.Length] = Item;
+        if (HeldItems.Count < 4)
+        {
+            HeldItems.Add(Item);
+        }
+        Vector3 Dimesions = Item.GetComponent<IInventoriable>().Scale();
+        int Index = HeldItems.IndexOf(Item);
+
+        Image DisplayedItem = ItemHolders[Index].GetComponent<Image>();
+
+        
+
     }
 
     public static void RemoveItem(GameObject Item)
     {
-        for (int i = 0; i < HeldItems.Length; i++)
-        {
-            if (HeldItems[i] == Item)
-            {
-                for (int j = 0; j < HeldItems.Length - 1 - i; j++)
-                {
-                    HeldItems[i] = HeldItems[i + j];
-
-                }
-                HeldItems[HeldItems.Length - 1] = null;
-                break;
-            }
-        }
+        HeldItems.Remove(Item);
     }
 
     

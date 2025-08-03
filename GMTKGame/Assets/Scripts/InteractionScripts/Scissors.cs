@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Scissors : MonoBehaviour, IInteractable
+public class Scissors : MonoBehaviour, IInteractable, IInventoriable
 {
 
 
 
     public void Interact()
     {
-        InventoryManager.AddItem(gameObject);
+        InventoryManager.PickUpItem(gameObject);
         transform.parent.gameObject.SetActive(false);
     }
 
@@ -18,4 +18,11 @@ public class Scissors : MonoBehaviour, IInteractable
 
         return IsInRange;
     }
+
+    public Vector3 Scale()
+    {
+        return new Vector3(1738, 973, 0.4f);
+    }
+
+
 }

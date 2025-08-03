@@ -8,6 +8,7 @@ TagManager:
   - BedroomCam
   - LivingroomCam
   - MainAnimatorHolder
+  - ItemHolders
   layers:
   - Default
   - TransparentFX
