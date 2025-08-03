@@ -1,10 +1,10 @@
 
 --poly.pizza--
 Quaternius
-CMHT Oculus *Check License
-Zsky *Check License
-Danni Bittman *CL
-Alex Safayan *CL
+CMHT Oculus CCBY
+Zsky CCBY
+Danni Bittman ccby
+Alex Safayan ccby
 MilkAndBanana
 Cookie Assets *CL
 Kenney
