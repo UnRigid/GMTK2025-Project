@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
+    
+
 
     [SerializeField] GameObject[] Cameras = new GameObject[2];
     float[] Angles = {37.4f, 37.4f };
@@ -15,6 +17,7 @@ public class GameController : MonoBehaviour
     GameObject playerOBJ;
 
     public static Animator MainAnimator;
+    public static AudioSource MainAudioSource;
 
     PlayerControls _playerControls;
     private void Awake()
@@ -34,6 +37,7 @@ public class GameController : MonoBehaviour
         GameHasntEnded = true;
         playerOBJ = GameObject.FindGameObjectWithTag("Player");
         MainAnimator = GameObject.FindGameObjectWithTag("MainAnimatorHolder").GetComponent<Animator>();
+        MainAudioSource = playerOBJ.GetComponent<AudioSource>();
 
         MainFunc();
 

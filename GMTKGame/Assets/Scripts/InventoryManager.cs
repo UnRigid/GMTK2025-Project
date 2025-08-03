@@ -60,7 +60,15 @@ public class InventoryManager : MonoBehaviour
         {
             HeldItems.Add(Item);
         }
-        Debug.Log("Picked up " + Item.name + ", Index is " + HeldItems.IndexOf(Item));
+        string log="";
+        foreach (GameObject _object in HeldItems)
+        {
+            log += _object.name;
+            log += HeldItems.IndexOf(_object);
+            log += " ";
+        }
+        Debug.Log("Picked up " + Item.name + ", Index is " + HeldItems.IndexOf(Item) + " " + log);
+        
         Vector3 Dimesions = Item.GetComponent<IInventoriable>().Scale();
         int Index = HeldItems.IndexOf(Item);
 
@@ -137,6 +145,15 @@ public class InventoryManager : MonoBehaviour
         }
 
         HeldItems = Temp;
+
+        foreach (GameObject item in HeldItems)
+        {
+            ItemHolders[HeldItems.IndexOf(item)].GetComponent<Image>().sprite = sprites[HeldItems.IndexOf(item)];
+        }
+
+
+
+
         string log = "Refreshed ";
         foreach (Sprite sprite in sprites)
         {
