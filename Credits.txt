@@ -7,6 +7,8 @@ Danni Bittman *CL
 Alex Safayan *CL
 MilkAndBanana
 Cookie Assets *CL
+Kenney
+Poly By Google *CL
 ----
 
 --polyhaven.com--
@@ -21,3 +23,7 @@ Jimmy Johansson  *Check License
 
 --Fonts--
 ----
+
+
+--flaticon--
+https://www.flaticon.com/free-icons/rope    Rope icons created by manshagraphics - Flaticon

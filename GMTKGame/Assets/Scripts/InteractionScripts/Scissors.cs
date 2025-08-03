@@ -3,11 +3,11 @@ using UnityEngine;
 public class Scissors : MonoBehaviour, IInteractable, IInventoriable
 {
 
+    [SerializeField] Sprite ScissorsImage;
 
-
-    public void Interact()
+    public void Interact(Vector3 m)
     {
-        InventoryManager.PickUpItem(gameObject);
+        InventoryManager.PickUpItem(gameObject, ScissorsImage);
         transform.parent.gameObject.SetActive(false);
     }
 

@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InteractionControl : MonoBehaviour
 {
@@ -36,18 +37,24 @@ public class InteractionControl : MonoBehaviour
         CheckInteractable();
     }
 
+    private bool isHovering()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
 
     void TryInteract(InputAction.CallbackContext callbackContext)
     {
-        Vector3 MousePosition = _playercontrols.Interactions.MousePos.ReadValue<Vector2>();
+        Vector2 MousePosition = _playercontrols.Interactions.MousePos.ReadValue<Vector2>();
+
         Ray ray = PlayerMovement.ActiveCamera.transform.GetChild(0).GetComponent<Camera>().ScreenPointToRay(new Vector3(MousePosition.x, MousePosition.y));
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << 6))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << 6) && !isHovering())
         {
             if (hit.transform.TryGetComponent(out IInteractable interactable))
             {
                 if (interactable.InRange())
                 {
-                interactable.Interact();
+                interactable.Interact(MousePosition);
                     
                 }
             }

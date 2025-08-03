@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameController : MonoBehaviour
     GameObject playerOBJ;
 
     public static Animator MainAnimator;
+
+    PlayerControls _playerControls;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -33,7 +36,36 @@ public class GameController : MonoBehaviour
         MainAnimator = GameObject.FindGameObjectWithTag("MainAnimatorHolder").GetComponent<Animator>();
 
         MainFunc();
+
+        _playerControls = new PlayerControls();
+        _playerControls.Debug.Enable();
+        _playerControls.Debug.NextCam.performed += SwitchCamera;
+    }
+
+    void SwitchCamera(InputAction.CallbackContext callbackContext)
+    {
+        PlayerMovement.ActiveCamera = Cameras[Camera_Index];
+        playerOBJ.transform.localEulerAngles = new Vector3(0, Angles[Camera_Index], 0);
+        foreach (GameObject ACam in Cameras)
+        {
+            if (ACam == PlayerMovement.ActiveCamera)
+            {
+                ACam.SetActive(true);
+            }
+            else
+            {
+                ACam.SetActive(false);
+            }
+
+
+        }
+
         
+        Camera_Index += 1;
+        if (Camera_Index > Cameras.Length - 1)
+        {
+            Camera_Index = 0;
+        }
     }
 
     async void MainFunc()
@@ -44,7 +76,7 @@ public class GameController : MonoBehaviour
         {
 
             PlayerMovement.ActiveCamera = Cameras[Camera_Index];
-            playerOBJ.transform.localEulerAngles = new Vector3(0, Angles[Camera_Index],0);
+            playerOBJ.transform.localEulerAngles = new Vector3(0, Angles[Camera_Index], 0);
             foreach (GameObject ACam in Cameras)
             {
                 if (ACam == PlayerMovement.ActiveCamera)
@@ -71,5 +103,6 @@ public class GameController : MonoBehaviour
     void OnDestroy()
     {
         GameHasntEnded = false;
+        _playerControls.Debug.Disable();
     }
 }

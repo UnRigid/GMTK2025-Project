@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Closet : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    public void Interact(Vector3 mousePos)
     {
         GameController.MainAnimator.SetTrigger("OpenCloset");
         Transform Overlay = transform.GetChild(0);

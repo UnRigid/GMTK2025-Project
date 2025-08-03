@@ -184,6 +184,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "357db5b9-70a9-44a1-bae7-26818ab12290",
+            "actions": [
+                {
+                    "name": "NextCam",
+                    "type": "Button",
+                    "id": "620bac80-cd3b-49b4-ac5a-3e54ffcb76e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0724c9d2-621f-40cb-a612-6bad073b7269",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
