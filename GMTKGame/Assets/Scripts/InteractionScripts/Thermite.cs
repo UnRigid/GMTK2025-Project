@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class Thermite : MonoBehaviour
+public class Thermite : MonoBehaviour ,IInventoriable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Vector3 Scale()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return new Vector3(619, 107, .6f);
     }
 }

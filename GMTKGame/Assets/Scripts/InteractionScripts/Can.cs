@@ -13,7 +13,9 @@ public class Can : MonoBehaviour, IInteractable, IInventoriable
 
     void CutCan()
     {
-            InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+                    Destroy(DynamicInteractParent.GetChild(0).gameObject);
+
     }
 
     public void Interact(Vector3 mousePos)

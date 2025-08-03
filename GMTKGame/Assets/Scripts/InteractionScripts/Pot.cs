@@ -22,6 +22,7 @@ public class Pot : MonoBehaviour, IInteractable, IInventoriable
         InventoryManager.RemoveItem(UsableItems[0]);
         InventoryManager.RemoveItem(UsableItems[1]);
         InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+        Destroy(DynamicInteractParent.GetChild(0).gameObject);
     }
 
     public void Interact(Vector3 mousePos)

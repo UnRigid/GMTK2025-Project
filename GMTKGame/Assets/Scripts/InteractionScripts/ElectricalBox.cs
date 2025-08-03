@@ -23,6 +23,7 @@ public class ElectricalBox : MonoBehaviour, IInteractable
         InventoryManager.RemoveItem(UsableItems[1]);
         ThermiteObj.SetActive(true);
         gameObject.SetActive(false);
+                Destroy(DynamicInteractParent.GetChild(0).gameObject);
 
     }
 

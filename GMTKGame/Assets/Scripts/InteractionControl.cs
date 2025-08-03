@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class InteractionControl : MonoBehaviour
 {
@@ -30,11 +31,17 @@ public class InteractionControl : MonoBehaviour
         _playercontrols.Interactions.Enable();
 
         _playercontrols.Interactions.LMB.performed += TryInteract;
+        _playercontrols.Interactions.ReturnToMenu.performed += ReturnToMenu_;
     }
 
     private void Update()
     {
         CheckInteractable();
+    }
+
+    void ReturnToMenu_(InputAction.CallbackContext callbackContext)
+    {
+        SceneManager.LoadScene(0);
     }
 
     private bool isHovering()

@@ -22,6 +22,8 @@ public class Pan : MonoBehaviour, IInteractable, IInventoriable
     void GetRust()
     {
         InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
+                Destroy(DynamicInteractParent.GetChild(0).gameObject);
+
     }
 
     public void Interact(Vector3 mousePos)

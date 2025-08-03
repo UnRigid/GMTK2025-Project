@@ -10,6 +10,7 @@ public class ThermiteObj : MonoBehaviour, IInteractable
     [SerializeField] GameObject[] UsableItems;// 0-lighter
 
     [SerializeField] GameObject Particles;
+    [SerializeField] GameObject EndGameUI;
     
     public bool InRange()
     {
@@ -22,6 +23,9 @@ public class ThermiteObj : MonoBehaviour, IInteractable
     void IgniteThermite()
     {
         Particles.SetActive(true);
+                Destroy(DynamicInteractParent.GetChild(0).gameObject);
+        EndGameUI.SetActive(true);
+        GameController.MainAnimator.SetTrigger("EndGame");
     }
 
     public void Interact(Vector3 mousePos)

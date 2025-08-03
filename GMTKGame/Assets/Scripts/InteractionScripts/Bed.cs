@@ -22,7 +22,8 @@ public class Bed : MonoBehaviour, IInteractable
     void CutBedding()
     {
         InventoryManager.PickUpItem(ObtainableItems[0], Icons[0]);
-        
+                Destroy(DynamicInteractParent.GetChild(0).gameObject);
+
     }
 
     public void Interact(Vector3 mousePos)

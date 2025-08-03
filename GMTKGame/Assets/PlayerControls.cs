@@ -244,6 +244,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReturnToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""510bc478-271d-4b21-8c6b-907496450499"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -266,6 +275,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a13549a1-1e2a-442e-8f78-d7cd6908fcb6"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -310,6 +330,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
         m_Interactions_LMB = m_Interactions.FindAction("LMB", throwIfNotFound: true);
         m_Interactions_MousePos = m_Interactions.FindAction("MousePos", throwIfNotFound: true);
+        m_Interactions_ReturnToMenu = m_Interactions.FindAction("ReturnToMenu", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_NextCam = m_Debug.FindAction("NextCam", throwIfNotFound: true);
@@ -504,6 +525,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IInteractionsActions> m_InteractionsActionsCallbackInterfaces = new List<IInteractionsActions>();
     private readonly InputAction m_Interactions_LMB;
     private readonly InputAction m_Interactions_MousePos;
+    private readonly InputAction m_Interactions_ReturnToMenu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interactions".
     /// </summary>
@@ -523,6 +545,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interactions/MousePos".
         /// </summary>
         public InputAction @MousePos => m_Wrapper.m_Interactions_MousePos;
+        /// <summary>
+        /// Provides access to the underlying input action "Interactions/ReturnToMenu".
+        /// </summary>
+        public InputAction @ReturnToMenu => m_Wrapper.m_Interactions_ReturnToMenu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -555,6 +581,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
+            @ReturnToMenu.started += instance.OnReturnToMenu;
+            @ReturnToMenu.performed += instance.OnReturnToMenu;
+            @ReturnToMenu.canceled += instance.OnReturnToMenu;
         }
 
         /// <summary>
@@ -572,6 +601,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
+            @ReturnToMenu.started -= instance.OnReturnToMenu;
+            @ReturnToMenu.performed -= instance.OnReturnToMenu;
+            @ReturnToMenu.canceled -= instance.OnReturnToMenu;
         }
 
         /// <summary>
@@ -744,6 +776,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMousePos(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ReturnToMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReturnToMenu(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Debug" which allows adding and removing callbacks.

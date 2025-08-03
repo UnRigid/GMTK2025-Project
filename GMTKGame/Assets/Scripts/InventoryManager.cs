@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
 
+    [SerializeField] static Sprite EmptySprite;
     public static List<GameObject> HeldItems = new List<GameObject>();
     static InventoryManager instance;
 
@@ -72,9 +73,12 @@ public class InventoryManager : MonoBehaviour
     public static void RemoveItem(GameObject Item)
     {
         int Index = HeldItems.IndexOf(Item);
+        Index = 4 - Index;
+        ItemHolders[Index].GetComponent<Image>().sprite = EmptySprite;
         ItemHolders[Index].SetActive(false);
 
         HeldItems.Remove(Item);
+
     }
 
     public static bool CheckForItem(GameObject Item) {
