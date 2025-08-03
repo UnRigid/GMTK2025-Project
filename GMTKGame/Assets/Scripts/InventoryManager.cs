@@ -141,12 +141,14 @@ public class InventoryManager : MonoBehaviour
         foreach (Sprite sprite in sprites)
         {
             log += sprite.name;
+            log += sprites.IndexOf(sprite);
             log += " ";
         }
 
-        foreach (GameObject gameObject in HeldItems)
+        foreach (GameObject _gameObject in HeldItems)
         {
-            log += gameObject.name;
+            log += _gameObject.name;
+            log += HeldItems.IndexOf(_gameObject);
             log += " ";
         }
         Debug.Log(log);
